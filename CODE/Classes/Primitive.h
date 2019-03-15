@@ -9,9 +9,10 @@ namespace Primitive
 		d_Node();
 		~d_Node();
 		cocos2d::DrawNode *getPrimi();
-		cocos2d::DrawNode *d_node;
-	private:
 		
+		cocos2d::Vec2 velocity;
+	private:
+		cocos2d::DrawNode *d_node;
 	};
 
 	class Circ : public d_Node
@@ -34,7 +35,7 @@ namespace Primitive
 		float rad;
 		float ang;
 		unsigned int seg;
-		cocos2d::Vec2 velocity;
+		
 	};
 
 	class Recta : public d_Node
