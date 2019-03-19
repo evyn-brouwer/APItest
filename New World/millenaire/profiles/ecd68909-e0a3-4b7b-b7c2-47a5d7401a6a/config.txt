@@ -1,3 +1,0 @@
-player_name=evynster
-donation_mode=false
-village_diplomacy=-359/67/-1075,5
