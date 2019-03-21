@@ -41,7 +41,7 @@ namespace Primitive
 	class Recta : public d_Node
 	{
 	public:
-		Recta();
+		Recta(const cocos2d::Vec2 &startPos, const cocos2d::Vec2 &endPos);
 		~Recta();
 		cocos2d::DrawNode *getPrim();
 	private:
@@ -51,7 +51,7 @@ namespace Primitive
 	class Line : public d_Node
 	{
 	public:
-		Line();
+		Line(const cocos2d::Vec2 &startPos, const cocos2d::Vec2 &endPos);
 		~Line();
 		cocos2d::DrawNode *getPrim();
 	private:

@@ -36,9 +36,19 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+	//update functions
+	void update(float dt);
+	void checkInput(float dt);
+
+	//initial stuff
+	void initSprites();
+private:
+	cocos2d::Director* director;
+
+	cocos2d::Sprite *test;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

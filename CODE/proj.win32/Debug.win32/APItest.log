@@ -1,15 +1,3 @@
-﻿  AppDelegate.cpp
-  HelloWorldScene.cpp
-  main.cpp
-  Primitive.cpp
-AppDelegate.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-     Creating library C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.lib and object C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exp
-  APItest.vcxproj -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exe
+﻿  APItest.vcxproj -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exe
   Performing Custom Build Step
-  C:\Users\Evyn\Documents\repos\APItest\CODE\Resources\CloseNormal.png -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\Resources\CloseNormal.png
-  C:\Users\Evyn\Documents\repos\APItest\CODE\Resources\CloseSelected.png -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\Resources\CloseSelected.png
-  C:\Users\Evyn\Documents\repos\APItest\CODE\Resources\HelloWorld.png -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\Resources\HelloWorld.png
-  C:\Users\Evyn\Documents\repos\APItest\CODE\Resources\fonts\arial.ttf -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\Resources\fonts\arial.ttf
-  C:\Users\Evyn\Documents\repos\APItest\CODE\Resources\fonts\Marker Felt.ttf -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\Resources\fonts\Marker Felt.ttf
-  C:\Users\Evyn\Documents\repos\APItest\CODE\Resources\res\.gitkeep -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\Resources\res\.gitkeep
-  6 File(s) copied
+  0 File(s) copied

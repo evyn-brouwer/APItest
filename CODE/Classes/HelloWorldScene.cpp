@@ -58,9 +58,9 @@ bool HelloWorld::init()
 
     // add a "close" icon to exit the progress. it's an autorelease object
     auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+	  "CloseNormal.png",
+	  "CloseSelected.png",
+	  CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
     if (closeItem == nullptr ||
         closeItem->getContentSize().width <= 0 ||
@@ -79,7 +79,7 @@ bool HelloWorld::init()
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
-
+	/*
     /////////////////////////////
     // 3. add your codes below...
 
@@ -114,7 +114,12 @@ bool HelloWorld::init()
 
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
-    }
+    }*/
+
+	//put code here
+	initSprites();
+	director = cocos2d::Director::getInstance();
+	this->scheduleUpdate();
     return true;
 }
 
@@ -131,3 +136,24 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 
 }
+
+void HelloWorld::initSprites()
+{
+	test = cocos2d::Sprite::create("Evynster.jpg");
+	test->setPosition(cocos2d::Vec2(0,0));
+	test->setAnchorPoint(cocos2d::Vec2(0,0));
+	test->setVisible(true);
+	this->addChild(test, -10);
+}
+
+void HelloWorld::update(float dt)
+{
+	checkInput(dt);
+	this->getDefaultCamera()->setPosition(cocos2d::Vec2(0,this->getDefaultCamera()->getPosition().y+1));
+}
+
+void HelloWorld::checkInput(float dt)
+{
+}
+
+
