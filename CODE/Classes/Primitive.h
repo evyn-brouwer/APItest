@@ -7,6 +7,7 @@ namespace Primitive
 	{
 	public:
 		d_Node();
+		d_Node(cocos2d::Vec2 loc);
 		~d_Node();
 		cocos2d::DrawNode *getPrimi();
 		

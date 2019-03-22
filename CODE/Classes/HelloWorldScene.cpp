@@ -158,17 +158,29 @@ void HelloWorld::update(float dt)
 void HelloWorld::checkInput(float dt)
 {
 	if (isEvent(Events::A))
+	{
 		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x - 1,
 			this->getDefaultCamera()->getPosition().y));
+	}
+		
 	if (isEvent(Events::W))
+	{
 		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x,
 			this->getDefaultCamera()->getPosition().y + 1));
+	}
+		
 	if (isEvent(Events::D))
+	{
 		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x + 1,
 			this->getDefaultCamera()->getPosition().y));
+	}
+		
 	if (isEvent(Events::S))
+	{
 		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x,
 			this->getDefaultCamera()->getPosition().y - 1));
+	}
+		
 }
 
 

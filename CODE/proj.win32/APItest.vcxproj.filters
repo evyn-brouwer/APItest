@@ -10,6 +10,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pacman">
+      <UniqueIdentifier>{b812b28a-d140-4359-8e80-9aa64793370b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
@@ -63,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\main.h">
       <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Pacman</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

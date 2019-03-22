@@ -4,20 +4,24 @@
 #include "Primitive.h"
 namespace Game
 {
-	class GameObject
+	class Object
 	{
 	public:
-		GameObject();
-		GameObject(const char* fileName,const cocos2d::Vec2 &location, baseGame::ObjectBox boxType);
-
-		GameObject(const char* fileName, const cocos2d::Vec2 &location, baseGame::ObjectBox boxType, float radius, float angle, unsigned int segments);
-		~GameObject();
+		Object();
+		Object(const char* fileName,const cocos2d::Vec2 &location);
+		Object(const char* fileName, const cocos2d::Vec2 &location, float radius, float angle, unsigned int segments);
+		Object(const char* fileName,const cocos2d::Vec2 & location, cocos2d::Vec2 size);
+		~Object();
 		cocos2d::Sprite* getSprite()const;
 		void update(float dt);
-
+		cocos2d::Vec2 getLocation()const;
+		void setLocation(const cocos2d::Vec2 &newLoc);
 	private:
 		cocos2d::Sprite *sprite;
-		baseGame::ObjectBox collisionBox;
-
+		baseGame::ObjectBox collisionBoxType;
+		cocos2d::Vec2 squareBox;
+		cocos2d::Vec2 rect[4];
+		Primitive::Circ cBox;
+		cocos2d::DrawNode *node;
 	};
 }

@@ -1,7 +1,4 @@
-﻿  HelloWorldScene.cpp
-  Input.cpp
-AppDelegate.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-     Creating library C:\Users\100702629\Documents\GitHubStuff\repos\APItest\CODE\proj.win32\Debug.win32\APItest.lib and object C:\Users\100702629\Documents\GitHubStuff\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exp
+﻿  GameObject.cpp
   APItest.vcxproj -> C:\Users\100702629\Documents\GitHubStuff\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exe
   Performing Custom Build Step
   0 File(s) copied
