@@ -10,7 +10,6 @@ namespace Primitive
 		d_Node(cocos2d::Vec2 loc);
 		~d_Node();
 		cocos2d::DrawNode *getPrimi();
-		
 		cocos2d::Vec2 velocity;
 	private:
 		cocos2d::DrawNode *d_node;
@@ -19,6 +18,7 @@ namespace Primitive
 	class Circ : public d_Node
 	{
 	public:
+		Circ();
 		Circ(const cocos2d::Vec2 &loc, float &radius, float &angle, unsigned int &segments);
 		~Circ();
 		cocos2d::DrawNode *getPrim();
@@ -32,6 +32,7 @@ namespace Primitive
 		cocos2d::Vec2 getLocation();
 		cocos2d::Vec2 getVelocity();
 		bool checkCollision(Circ other);
+		bool checkCollision(Recta other);
 	private:
 		float rad;
 		float ang;

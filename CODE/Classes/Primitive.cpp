@@ -1,5 +1,10 @@
 #include "Primitive.h"
 
+Primitive::d_Node::d_Node()
+{
+	d_node = cocos2d::DrawNode::create();
+}
+
 Primitive::d_Node::d_Node(cocos2d::Vec2 loc)
 {
 	d_node = cocos2d::DrawNode::create();
@@ -15,6 +20,14 @@ cocos2d::DrawNode * Primitive::d_Node::getPrimi()
 	return d_node;
 }
 
+Primitive::Circ::Circ()
+{
+	d_Node();
+	rad = 0;
+	ang = 0;
+	seg = 0;
+}
+
 Primitive::Circ::Circ(const cocos2d::Vec2 & loc, float & radius, float & angle, unsigned int & segments)
 {
 	d_Node(loc);
@@ -24,9 +37,18 @@ Primitive::Circ::Circ(const cocos2d::Vec2 & loc, float & radius, float & angle, 
 	
 }
 
+Primitive::Circ::~Circ()
+{
+}
+
 cocos2d::DrawNode * Primitive::Circ::getPrim()
 {
 	return getPrimi();
+}
+
+void Primitive::Circ::update(float dt)
+{
+	
 }
 
 cocos2d::DrawNode * Primitive::Recta::getPrim()
