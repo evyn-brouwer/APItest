@@ -1,7 +1,7 @@
 #pragma once
 #include "cocos2d.h"
 
-namespace Primitive
+namespace Primitives
 {
 	class d_Node
 	{

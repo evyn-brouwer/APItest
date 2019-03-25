@@ -119,8 +119,12 @@ bool HelloWorld::init()
     }*/
 
 	//put code here
+	initPrimitives();
+	initObjects();
 	initSprites();
 	director = cocos2d::Director::getInstance();
+	
+	
 	this->scheduleUpdate();
     return true;
 }
@@ -139,20 +143,62 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 }
 
+void HelloWorld::initPrimitives()
+{
+	borders =  new Primitives::Recta(cocos2d::Vec2(Bbottom, Bbottom), cocos2d::Vec2(Btop, Btop));
+	borders->getPrim()->setVisible(true);
+	this->addChild(borders->getPrim(),10);
+}
+
+void HelloWorld::initObjects()
+{
+	testObject = new Game::Object("t_55.png", cocos2d::Vec2(Bbottom, Bbottom), cocos2d::Vec2(10, 10));
+	testObject->getSprite()->setAnchorPoint(cocos2d::Vec2(0, 0));
+	testObject->getSprite()->setVisible(true);
+	testObject->setVelocity(cocos2d::Vec2(40, 20));
+	this->addChild(testObject->getSprite(), 10);
+	
+}
+
 void HelloWorld::initSprites()
 {
 	test = cocos2d::Sprite::create("Evynster.jpg");
 	test->setPosition(cocos2d::Vec2(0,0));
 	test->setAnchorPoint(cocos2d::Vec2(0,0));
-	test->setVisible(true);
+	//test->setVisible(true);
 	this->addChild(test, -10);
-	
+
+	testLabel = cocos2d::Label::create(std::to_string(testObject->getLocation().x),"fonts/arial.ttf",25);
+	testLabel->setPosition(cocos2d::Vec2(100,100));
+	testLabel->setVisible(true);
+	this->addChild(testLabel);
 }
 
 void HelloWorld::update(float dt)
 {
 	checkInput(dt);
-	
+	testObject->update(dt);
+	testLabel->setString((std::to_string(testObject->getLocation().x)));
+	if (testObject->getLocation().x> Btop)
+	{
+		testObject->setLocation(cocos2d::Vec2(Btop,testObject->getLocation().y));
+		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x*-1,testObject->getVelocity().y));
+	}
+	if (testObject->getLocation().x < Bbottom)
+	{
+		testObject->setLocation(cocos2d::Vec2(Bbottom, testObject->getLocation().y));
+		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x*-1, testObject->getVelocity().y));
+	}
+	if (testObject->getLocation().y > Btop)
+	{
+		testObject->setLocation(cocos2d::Vec2(testObject->getLocation().x, Btop));
+		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x, testObject->getVelocity().y*-1));
+	}
+	if (testObject->getLocation().y < Bbottom)
+	{
+		testObject->setLocation(cocos2d::Vec2(testObject->getLocation().x, Bbottom));
+		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x, testObject->getVelocity().y*-1));
+	}
 }
 
 void HelloWorld::checkInput(float dt)

@@ -26,6 +26,8 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "GameObject.h"
+#include "Primitive.h"
 
 class HelloWorld : public cocos2d::Scene
 {
@@ -44,11 +46,19 @@ public:
 	void checkInput(float dt);
 
 	//initial stuff
+	void initPrimitives();
+	void initObjects();
 	void initSprites();
 private:
 	cocos2d::Director* director;
-
+	Game::Object * testObject;
 	cocos2d::Sprite *test;
+	cocos2d::Label *testLabel;
+	int Btop = 250;
+	int Bbottom = 50;
+	int Bside = 250;
+	Primitives::Recta *borders;
+	
 };
 
 #endif // __HELLOWORLD_SCENE_H__

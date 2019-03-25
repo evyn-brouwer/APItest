@@ -23,7 +23,7 @@ namespace Game
 		bool checkCollision(Game::Object other);
 	private:
 		cocos2d::Sprite *sprite;
-		Primitive::Recta rBox;
+		Primitives::Recta rBox;
 		cocos2d::DrawNode *node;
 		cocos2d::Vec2 velocity;
 	};

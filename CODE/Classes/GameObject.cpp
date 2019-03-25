@@ -13,8 +13,10 @@ Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location)
 
 Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location, cocos2d::Vec2 size)
 {
-	Object(fileName,location);
-	rBox = Primitive::Recta(cocos2d::Vec2(location.x,location.y),cocos2d::Vec2(location.x+size.x, location.y+size.y));
+	node = cocos2d::DrawNode::create();
+	sprite = cocos2d::Sprite::create(fileName);
+	sprite->setPosition(location);
+	rBox = Primitives::Recta(cocos2d::Vec2(location.x,location.y),cocos2d::Vec2(location.x+size.x, location.y+size.y));
 }
 
 Game::Object::~Object()
@@ -28,7 +30,7 @@ cocos2d::Sprite * Game::Object::getSprite() const
 
 void Game::Object::update(float dt)
 {
-	this->setLocation((this->getLocation() + this->getVelocity())*dt);
+	this->setLocation((this->getLocation() + this->getVelocity()*dt));
 }
 
 
