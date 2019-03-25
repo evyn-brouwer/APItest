@@ -1,7 +1,15 @@
 ﻿  AppDelegate.cpp
+  GameObject.cpp
   HelloWorldScene.cpp
-c:\users\100702629\documents\githubstuff\repos\apitest\code\classes\helloworldscene.cpp(171): warning C4996: 'cocos2d::Label::create': was declared deprecated
-  c:\users\100702629\desktop\cocos2d-x-3.17.1\cocos2d-x-3.17.1\cocos\2d\cclabel.h(611): note: see declaration of 'cocos2d::Label::create'
-  APItest.vcxproj -> C:\Users\100702629\Documents\GitHubStuff\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exe
+  Input.cpp
+  main.cpp
+c:\users\evyn\documents\repos\apitest\code\classes\helloworldscene.cpp(171): warning C4996: 'cocos2d::Label::create': was declared deprecated
+  c:\users\evyn\desktop\cocos2d-x-3.17.1\cocos\2d\cclabel.h(611): note: see declaration of 'cocos2d::Label::create'
+  Primitive.cpp
+  LINK : C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exe not found or not built by the last incremental link; performing full link
+AppDelegate.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+     Creating library C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.lib and object C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exp
+  APItest.vcxproj -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exe
   Performing Custom Build Step
-  0 File(s) copied
+  C:\Users\Evyn\Documents\repos\APItest\CODE\Resources\t_55.png -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\Resources\t_55.png
+  1 File(s) copied
