@@ -55,9 +55,6 @@
     <ClInclude Include="..\Classes\GameObject.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Enums and Typedefs.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Input.h">
       <Filter>src</Filter>
     </ClInclude>

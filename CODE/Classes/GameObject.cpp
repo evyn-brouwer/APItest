@@ -1,5 +1,9 @@
 #include "GameObject.h"
 
+Game::Object::Object()
+{
+}
+
 Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location)
 {
 	node = cocos2d::DrawNode::create();
@@ -7,20 +11,10 @@ Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location)
 	sprite->setPosition(location);
 }
 
-Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location, float radius, float angle, unsigned int segments)
-{
-	Object(fileName,location);
-
-}
-
 Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location, cocos2d::Vec2 size)
 {
 	Object(fileName,location);
-	squareBox = size;
-	rect[0] = cocos2d::Vec2(location.x - size.x / 2, location.y - size.y / 2);
-	rect[1] = cocos2d::Vec2(location.x + size.x / 2, location.y - size.y / 2);
-	rect[2] = cocos2d::Vec2(location.x + size.x / 2, location.y + size.y / 2);
-	rect[3] = cocos2d::Vec2(location.x - size.x / 2, location.y + size.y / 2);
+	rBox = Primitive::Recta(cocos2d::Vec2(location.x,location.y),cocos2d::Vec2(location.x+size.x, location.y+size.y));
 }
 
 Game::Object::~Object()
@@ -34,15 +28,23 @@ cocos2d::Sprite * Game::Object::getSprite() const
 
 void Game::Object::update(float dt)
 {
-	node->setPosition(this->getLocation());
+	this->setLocation((this->getLocation() + this->getVelocity())*dt);
 }
 
-cocos2d::Vec2 Game::Object::getLocation() const
+
+cocos2d::Vec2 Game::Object::getLocation()
 {
 	return sprite->getPosition();
 }
 
-void Game::Object::setLocation(const cocos2d::Vec2 & newLoc)
+cocos2d::Vec2 Game::Object::getVelocity()
 {
-	sprite->setPosition(newLoc);
+	return velocity;
 }
+
+bool Game::Object::checkCollision(Game::Object other)
+{
+	//TODO
+	return false;
+}
+
