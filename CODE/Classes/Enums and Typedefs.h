@@ -8,5 +8,17 @@ namespace baseGame
 		line,
 		capsule
 	};
+	
 
+}
+namespace Pacman
+{
+	enum Direction
+	{
+		up,
+		down,
+		left,
+		right
+
+	};
 }

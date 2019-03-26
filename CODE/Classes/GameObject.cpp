@@ -23,7 +23,7 @@ Game::Object::~Object()
 {
 }
 
-cocos2d::Sprite * Game::Object::getSprite() const
+cocos2d::Sprite * Game::Object::getSprite() 
 {
 	return sprite;
 }
@@ -33,6 +33,11 @@ void Game::Object::update(float dt)
 	this->setLocation((this->getLocation() + this->getVelocity()*dt));
 }
 
+
+void Game::Object::setLocation(cocos2d::Vec2 new_Loc)
+{
+	sprite->setPosition(new_Loc);
+}
 
 cocos2d::Vec2 Game::Object::getLocation()
 {
@@ -48,5 +53,10 @@ bool Game::Object::checkCollision(Game::Object other)
 {
 	//TODO
 	return false;
+}
+
+void Game::Object::setSprite(std::string imageName)
+{
+	sprite = cocos2d::Sprite::create(imageName);
 }
 

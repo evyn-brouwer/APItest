@@ -51,12 +51,10 @@ public:
 	void initSprites();
 private:
 	cocos2d::Director* director;
-	Game::Object * testObject;
-	cocos2d::Label *testLabel;
-	int Btop = 250;
-	int Bbottom = 50;
-	int Bside = 250;
-	Primitives::Recta *borders;
+
+	cocos2d::Sprite *menuBackground;
+	cocos2d::Label *titleLabel;
+	cocos2d::Label *startLabel;
 	
 };
 

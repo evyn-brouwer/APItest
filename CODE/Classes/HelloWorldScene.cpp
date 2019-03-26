@@ -26,6 +26,7 @@
 #include "SimpleAudioEngine.h"
 #include "Input.h"
 #include "Events.h"
+#include "GameScene.h"
 
 USING_NS_CC;
 
@@ -110,82 +111,50 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::initPrimitives()
 {
-	borders =  new Primitives::Recta(cocos2d::Vec2(Bbottom, Bbottom), cocos2d::Vec2(Btop, Btop));
-	borders->getPrim()->setVisible(true);
-	this->addChild(borders->getPrim(),10);
+
+
 }
 
 void HelloWorld::initObjects()
 {
-	testObject = new Game::Object("t_55.png", cocos2d::Vec2(Bbottom, Bbottom), cocos2d::Vec2(10, 10));
-	testObject->getSprite()->setAnchorPoint(cocos2d::Vec2(0, 0));
-	testObject->getSprite()->setVisible(true);
-	testObject->setVelocity(cocos2d::Vec2(40, 20));
-	this->addChild(testObject->getSprite(), 10);
+
 	
 }
 
 void HelloWorld::initSprites()
 {
+	menuBackground = cocos2d::Sprite::create("HelloWorld.png");
+	menuBackground->setAnchorPoint(cocos2d::Vec2(0,0));
+	menuBackground->setPosition(25,0);
+	menuBackground->setVisible(true);
+	this->addChild(menuBackground);
 
-	testLabel = cocos2d::Label::create(std::to_string(testObject->getLocation().x),"fonts/arial.ttf",25);
-	testLabel->setPosition(cocos2d::Vec2(100,100));
-	testLabel->setVisible(true);
-	this->addChild(testLabel);
+	titleLabel = cocos2d::Label::create("PAC-MAN","fonts/arial.ttf",35);
+	titleLabel->setPosition(cocos2d::Vec2(225,200));
+	titleLabel->setVisible(true);
+	this->addChild(titleLabel);
+
+	startLabel = cocos2d::Label::create("Press Space to Start!", "fonts/arial.ttf", 20);
+	startLabel->setPosition(225, 150);
+	startLabel->setVisible(true);
+	this->addChild(startLabel);
 }
 
 void HelloWorld::update(float dt)
 {
 	checkInput(dt);
-	testObject->update(dt);
-	testLabel->setString((std::to_string(testObject->getLocation().x)));
-	if (testObject->getLocation().x> Btop)
-	{
-		testObject->setLocation(cocos2d::Vec2(Btop,testObject->getLocation().y));
-		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x*-1,testObject->getVelocity().y));
-	}
-	if (testObject->getLocation().x < Bbottom)
-	{
-		testObject->setLocation(cocos2d::Vec2(Bbottom, testObject->getLocation().y));
-		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x*-1, testObject->getVelocity().y));
-	}
-	if (testObject->getLocation().y > Btop)
-	{
-		testObject->setLocation(cocos2d::Vec2(testObject->getLocation().x, Btop));
-		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x, testObject->getVelocity().y*-1));
-	}
-	if (testObject->getLocation().y < Bbottom)
-	{
-		testObject->setLocation(cocos2d::Vec2(testObject->getLocation().x, Bbottom));
-		testObject->setVelocity(cocos2d::Vec2(testObject->getVelocity().x, testObject->getVelocity().y*-1));
-	}
+
 }
 
 void HelloWorld::checkInput(float dt)
 {
-	if (isEvent(Events::A))
+	if (isEvent(Events::Space))
 	{
-		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x - 1,
-			this->getDefaultCamera()->getPosition().y));
+		auto game = GameScene::createScene();
+		director->replaceScene(TransitionFade::create(1.0f, game));
 	}
 		
-	if (isEvent(Events::W))
-	{
-		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x,
-			this->getDefaultCamera()->getPosition().y + 1));
-	}
-		
-	if (isEvent(Events::D))
-	{
-		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x + 1,
-			this->getDefaultCamera()->getPosition().y));
-	}
-		
-	if (isEvent(Events::S))
-	{
-		this->getDefaultCamera()->setPosition(cocos2d::Vec2(this->getDefaultCamera()->getPosition().x,
-			this->getDefaultCamera()->getPosition().y - 1));
-	}
+	
 		
 }
 

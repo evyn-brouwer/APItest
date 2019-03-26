@@ -10,17 +10,17 @@ namespace Game
 		Object(const char* fileName,const cocos2d::Vec2 &location);
 		Object(const char* fileName,const cocos2d::Vec2 & location, cocos2d::Vec2 size);
 		~Object();
-		cocos2d::Sprite* getSprite()const;
+		cocos2d::Sprite* getSprite();
 		void update(float dt);
 		template <typename T>
 		void addVelocity(T force);
 		template <typename T>
 		void setVelocity(T force);
-		template <typename T>
-		void setLocation(T force);
+		void setLocation(cocos2d::Vec2);
 		cocos2d::Vec2 getLocation();
 		cocos2d::Vec2 getVelocity();
 		bool checkCollision(Game::Object other);
+		void setSprite(std::string);
 	private:
 		cocos2d::Sprite *sprite;
 		Primitives::Recta rBox;
@@ -41,8 +41,3 @@ inline void Game::Object::setVelocity(T new_velocity)
 	velocity = new_velocity;
 }
 
-template<typename T>
-inline void Game::Object::setLocation(T new_Loc)
-{
-	sprite->setPosition(new_Loc);
-}
