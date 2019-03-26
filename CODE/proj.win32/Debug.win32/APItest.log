@@ -1,8 +1,0 @@
-﻿  AppDelegate.cpp
-  HelloWorldScene.cpp
-  main.cpp
-c:\users\evyn\documents\repos\apitest\code\classes\helloworldscene.cpp(171): warning C4996: 'cocos2d::Label::create': was declared deprecated
-  c:\users\evyn\desktop\cocos2d-x-3.17.1\cocos\2d\cclabel.h(611): note: see declaration of 'cocos2d::Label::create'
-  APItest.vcxproj -> C:\Users\Evyn\Documents\repos\APItest\CODE\proj.win32\Debug.win32\APItest.exe
-  Performing Custom Build Step
-  0 File(s) copied
