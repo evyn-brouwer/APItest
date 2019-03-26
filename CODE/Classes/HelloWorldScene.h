@@ -52,7 +52,6 @@ public:
 private:
 	cocos2d::Director* director;
 	Game::Object * testObject;
-	cocos2d::Sprite *test;
 	cocos2d::Label *testLabel;
 	int Btop = 250;
 	int Bbottom = 50;
