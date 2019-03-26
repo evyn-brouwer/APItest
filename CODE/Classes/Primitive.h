@@ -21,6 +21,7 @@ namespace Primitives
 		Recta(const cocos2d::Vec2 startPos, const cocos2d::Vec2 endPos);
 		~Recta();
 		
+		cocos2d::Vec2 getSize()const;
 	private:
 		cocos2d::Vec2 squareBox;
 		cocos2d::Vec2 rect[4];

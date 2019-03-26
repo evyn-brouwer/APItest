@@ -21,6 +21,7 @@ cocos2d::DrawNode * Primitives::d_Node::getPrim()
 }
 
 
+
 Primitives::Recta::Recta()
 {
 }
@@ -39,6 +40,11 @@ Primitives::Recta::Recta(const cocos2d::Vec2  startPos, const cocos2d::Vec2  end
 
 Primitives::Recta::~Recta()
 {
+}
+
+cocos2d::Vec2 Primitives::Recta::getSize() const
+{
+	return squareBox;
 }
 
 
