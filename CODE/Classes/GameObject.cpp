@@ -47,6 +47,11 @@ cocos2d::Vec2 Game::Object::getVelocity()
 bool Game::Object::checkCollision(Game::Object other)
 {
 	//TODO
-	return false;
+	if ((this->getLocation().x + this->rBox.getSize().x < other.getLocation().x) || (this->getLocation().x > other.getLocation().x + other.rBox.getSize().x))//x
+		return false;
+	if ((this->getLocation().x + this->rBox.getSize().y < other.getLocation().y) || (this->getLocation().y > other.getLocation().y + other.rBox.getSize().y))//y
+		return false;
+	
+		return true;
 }
 
