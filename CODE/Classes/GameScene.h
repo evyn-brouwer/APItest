@@ -52,8 +52,10 @@ public:
 	void initPrimitives();
 	void initObjects();
 	void initSprites();
+	void initLabels();
 private:
 	cocos2d::Director* director;
+	cocos2d::Label *scoreLabel;
 	Pacman::TurnPad *testPad;
 	Primitives::Recta *borders;
 	cocos2d::Sprite *backGround;

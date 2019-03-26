@@ -86,6 +86,7 @@ bool GameScene::init()
 	initPrimitives();
 	initObjects();
 	initSprites();
+	initLabels();
 	director = cocos2d::Director::getInstance();
 	player.getBox().getSprite()->setVisible(true);
 	this->addChild(player.getBox().getSprite());
@@ -133,9 +134,19 @@ void GameScene::initSprites()
 	this->addChild(backGround);
 }
 
+void GameScene::initLabels()
+{
+	scoreLabel = cocos2d::Label::create(("Score: \n" +std::to_string(player.getPoints())),"fonts/arial.ttf",10);
+	scoreLabel->setPosition(400,300);
+	scoreLabel->setVisible(true);
+	this->addChild(scoreLabel);
+}
+
 void GameScene::update(float dt)
 {
 	checkInput(dt);
+	scoreLabel->setString("Score: \n" + std::to_string(player.getPoints()));
+	player.addPoints(1);
 	
 }
 
