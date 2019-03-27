@@ -30,9 +30,14 @@ cocos2d::Sprite * Game::Object::getSprite()
 
 void Game::Object::update(float dt)
 {
-	this->setLocation((this->getLocation() + this->getVelocity()*dt));
+	this->setLocation(cocos2d::Vec2(this->getLocation() + (this->getVelocity()*dt)));
 }
 
+
+void Game::Object::setVelocity(cocos2d::Vec2 new_velocity)
+{
+	velocity = new_velocity;
+}
 
 void Game::Object::setLocation(cocos2d::Vec2 new_Loc)
 {

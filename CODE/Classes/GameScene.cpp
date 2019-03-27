@@ -26,6 +26,7 @@
 #include "SimpleAudioEngine.h"
 #include "Input.h"
 #include "Events.h"
+#include "Enums and Typedefs.h"
 USING_NS_CC;
 
 Scene* GameScene::createScene()
@@ -88,8 +89,8 @@ bool GameScene::init()
 	initSprites();
 	initLabels();
 	director = cocos2d::Director::getInstance();
-	player.getBox().getSprite()->setVisible(true);
-	this->addChild(player.getBox().getSprite());
+	player.getBox()->getSprite()->setVisible(true);
+	this->addChild(player.getBox()->getSprite());
 
 	this->scheduleUpdate();
 	return true;
@@ -145,6 +146,7 @@ void GameScene::initLabels()
 void GameScene::update(float dt)
 {
 	checkInput(dt);
+	player.getBox()->update(dt);
 	scoreLabel->setString("Score: \n" + std::to_string(player.getPoints()));
 	player.addPoints(1);
 	
@@ -154,24 +156,58 @@ void GameScene::checkInput(float dt)
 {
 	if (isEvent(Events::A))
 	{
-		player.getBox().setVelocity(cocos2d::Vec2(-1, 0));
+		player.setNextDirection(Pacman::left);
+		player.getBox()->setVelocity(cocos2d::Vec2(-50, 0));
 	}
 
 	if (isEvent(Events::W))
 	{
-		player.getBox().setVelocity(cocos2d::Vec2(0, 1));
+		player.setNextDirection(Pacman::up);
+		player.getBox()->setVelocity(cocos2d::Vec2(0, 50));
 	}
 
 	if (isEvent(Events::D))
 	{
-		player.getBox().setVelocity(cocos2d::Vec2(1, 0));
+		player.setNextDirection(Pacman::right);
+		player.getBox()->setVelocity(cocos2d::Vec2(50, 0));
 	}
 
 	if (isEvent(Events::S))
 	{
-		player.getBox().setVelocity(cocos2d::Vec2(0, -1));
+		player.setNextDirection(Pacman::down);
+		player.getBox()->setVelocity(cocos2d::Vec2(0, -50));
 	}
 
+}
+
+void GameScene::playerDirections(float dt)
+{
+	for (unsigned int i=0;i<turnPadList.size();i++)
+	{
+		if (player.getBox()->checkCollision(turnPadList[i].getBox()))
+		{
+			if (turnPadList[i].directions[player.getNextDirection()])
+			{
+				switch (player.getNextDirection())
+				{
+				case Pacman::up:
+					player.getBox()->setVelocity(cocos2d::Vec2(0,50));
+				case Pacman::down:
+					player.getBox()->setVelocity(cocos2d::Vec2(0,-50));
+				case Pacman::left:
+					player.getBox()->setVelocity(cocos2d::Vec2(-50,0));
+				case Pacman::right:
+					player.getBox()->setVelocity(cocos2d::Vec2(50,0));
+				default:
+					break;
+				}
+			}
+			else
+			{
+				player.getBox()->setVelocity(cocos2d::Vec2(0,0));
+			}
+		}
+	}
 }
 
 

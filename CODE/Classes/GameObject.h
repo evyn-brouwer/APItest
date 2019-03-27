@@ -14,8 +14,7 @@ namespace Game
 		void update(float dt);
 		template <typename T>
 		void addVelocity(T force);
-		template <typename T>
-		void setVelocity(T force);
+		void setVelocity(cocos2d::Vec2);
 		void setLocation(cocos2d::Vec2);
 		cocos2d::Vec2 getLocation();
 		cocos2d::Vec2 getVelocity();
@@ -35,9 +34,4 @@ inline void Game::Object::addVelocity(T new_velocity)
 	velocity += new_velocity;
 }
 
-template<typename T>
-inline void Game::Object::setVelocity(T new_velocity)
-{
-	velocity = new_velocity;
-}
 

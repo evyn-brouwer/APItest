@@ -47,6 +47,7 @@ public:
 	//update functions
 	void update(float dt);
 	void checkInput(float dt);
+	void playerDirections(float dt);
 
 	//initial stuff
 	void initPrimitives();
@@ -56,12 +57,19 @@ public:
 private:
 	cocos2d::Director* director;
 	cocos2d::Label *scoreLabel;
+
+
 	Pacman::TurnPad *testPad;
+
+
 	Primitives::Recta *borders;
 	cocos2d::Sprite *backGround;
+
+
 	Pacman::Player player;
 
 	Pacman::TurnPad *startPad;//for future reference
+	Pacman::TurnPad *GhostPad;//future reference
 	std::vector<Pacman::TurnPad> turnPadList;//future reference
 
 };

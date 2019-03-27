@@ -2,7 +2,7 @@
 
 Pacman::Player::Player()
 {
-	hitBox = Game::Object("CloseNormal.png",cocos2d::Vec2(100,100));
+	hitBox = new Game::Object("CloseNormal.png",cocos2d::Vec2(100,100));
 }
 
 Pacman::Direction Pacman::Player::getDirection()
@@ -55,7 +55,7 @@ void Pacman::Player::addPoints(unsigned int more_points)
 	points += more_points;
 }
 
-Game::Object Pacman::Player::getBox()
+Game::Object* Pacman::Player::getBox()
 {
 	return hitBox;
 }

@@ -18,7 +18,8 @@ namespace Pacman
 		up,
 		down,
 		left,
-		right
+		right,
+		none
 
 	};
 }

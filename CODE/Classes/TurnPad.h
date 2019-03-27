@@ -8,8 +8,8 @@ namespace Pacman
 		TurnPad();
 		TurnPad(bool up, bool down, bool left, bool right,cocos2d::Vec2 loc);
 		Game::Object getBox();
-	private:
 		bool directions[4];
+	private:
 		Game::Object hitBox;
 	};
 }

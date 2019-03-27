@@ -17,14 +17,14 @@ namespace Pacman
 		int getPoints();
 		void setPoints(unsigned int);
 		void addPoints(unsigned int);
-		Game::Object getBox();
+		Game::Object* getBox();
 		//bool checkPath();
 	private:
 		Pacman::Direction currentDirection;
 		Pacman::Direction nextDirection;
 		int lives=3;
 		int points = 0;
-		Game::Object hitBox;
+		Game::Object *hitBox;
 
 	};
 }
