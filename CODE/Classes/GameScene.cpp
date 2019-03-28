@@ -89,8 +89,7 @@ bool GameScene::init()
 	initSprites();
 	initLabels();
 	director = cocos2d::Director::getInstance();
-	player.getBox()->getSprite()->setVisible(true);
-	this->addChild(player.getBox()->getSprite());
+	
 
 	this->scheduleUpdate();
 	return true;
@@ -119,10 +118,19 @@ void GameScene::initPrimitives()
 
 void GameScene::initObjects()
 {
-	testPad = new Pacman::TurnPad(true,true,true,true,cocos2d::Vec2(50,50));
+	startPad = new Pacman::TurnPad(true,true,true,true,cocos2d::Vec2(150,150));
+	startPad->getBox().getSprite()->setVisible(true);
+	this->addChild(startPad->getBox().getSprite());
+
+	testPad = new Pacman::TurnPad(true,true,true,true,cocos2d::Vec2(150,200));
 	testPad->getBox().getSprite()->setVisible(true);
 	this->addChild(testPad->getBox().getSprite());
+	turnPadList.push_back(testPad);
 
+	player.getBox()->getSprite()->setVisible(true);
+	player.getBox()->setLocation(startPad->getBox().getLocation());
+	turnPadList.push_back(startPad);
+	this->addChild(player.getBox()->getSprite());
 }
 
 void GameScene::initSprites()
@@ -141,41 +149,62 @@ void GameScene::initLabels()
 	scoreLabel->setPosition(400,300);
 	scoreLabel->setVisible(true);
 	this->addChild(scoreLabel);
+
+	testLabel = cocos2d::Label::create("test", "fonts/arial.ttf", 10);
+	testLabel->setPosition(400, 270);
+	testLabel->setVisible(true);
+	this->addChild(testLabel);
 }
 
 void GameScene::update(float dt)
 {
 	checkInput(dt);
+	playerDirections(dt);
 	player.getBox()->update(dt);
 	scoreLabel->setString("Score: \n" + std::to_string(player.getPoints()));
 	player.addPoints(1);
-	
 }
 
 void GameScene::checkInput(float dt)
 {
 	if (isEvent(Events::A))
 	{
+		if (player.getDirection()==Pacman::right)
+		{
+			player.setDirection(Pacman::left);
+			player.getBox()->setVelocity(cocos2d::Vec2(-50, 0));
+		}
 		player.setNextDirection(Pacman::left);
-		player.getBox()->setVelocity(cocos2d::Vec2(-50, 0));
 	}
 
 	if (isEvent(Events::W))
 	{
+		if (player.getDirection() == Pacman::down)
+		{
+			player.setDirection(Pacman::up);
+			player.getBox()->setVelocity(cocos2d::Vec2(0, 50));
+		}
 		player.setNextDirection(Pacman::up);
-		player.getBox()->setVelocity(cocos2d::Vec2(0, 50));
 	}
 
 	if (isEvent(Events::D))
 	{
+		if (player.getDirection() == Pacman::left)
+		{
+			player.setDirection(Pacman::right);
+			player.getBox()->setVelocity(cocos2d::Vec2(50, 0));
+		}
 		player.setNextDirection(Pacman::right);
-		player.getBox()->setVelocity(cocos2d::Vec2(50, 0));
 	}
 
 	if (isEvent(Events::S))
 	{
+		if (player.getDirection() == Pacman::up)
+		{
+			player.setDirection(Pacman::up);
+			player.getBox()->setVelocity(cocos2d::Vec2(0, -50));
+		}
 		player.setNextDirection(Pacman::down);
-		player.getBox()->setVelocity(cocos2d::Vec2(0, -50));
 	}
 
 }
@@ -184,21 +213,26 @@ void GameScene::playerDirections(float dt)
 {
 	for (unsigned int i=0;i<turnPadList.size();i++)
 	{
-		if (player.getBox()->checkCollision(turnPadList[i].getBox()))
+		if (player.getBox()->checkCircCollision(turnPadList[i]->getBox()))
 		{
-			if (turnPadList[i].directions[player.getNextDirection()])
+			if (turnPadList[i]->directions[player.getNextDirection()])
 			{
 				switch (player.getNextDirection())
 				{
 				case Pacman::up:
-					player.getBox()->setVelocity(cocos2d::Vec2(0,50));
+					player.getBox()->setVelocity(cocos2d::Vec2(0, 50));
+					break;
 				case Pacman::down:
-					player.getBox()->setVelocity(cocos2d::Vec2(0,-50));
+					player.getBox()->setVelocity(cocos2d::Vec2(0, -50));
+					break;
 				case Pacman::left:
-					player.getBox()->setVelocity(cocos2d::Vec2(-50,0));
+					player.getBox()->setVelocity(cocos2d::Vec2(-50, 0));
+					break;
 				case Pacman::right:
-					player.getBox()->setVelocity(cocos2d::Vec2(50,0));
+					player.getBox()->setVelocity(cocos2d::Vec2(50, 0));
+					break;
 				default:
+					player.getBox()->setVelocity(cocos2d::Vec2(0, 0));
 					break;
 				}
 			}
@@ -206,6 +240,7 @@ void GameScene::playerDirections(float dt)
 			{
 				player.getBox()->setVelocity(cocos2d::Vec2(0,0));
 			}
+			player.setDirection(player.getNextDirection());
 		}
 	}
 }

@@ -47,6 +47,21 @@ cocos2d::Vec2 Primitives::Recta::getSize() const
 	return squareBox;
 }
 
+Primitives::Circ::Circ()
+{
+	radius = 0;
+}
 
+Primitives::Circ::Circ(float new_radius)
+{
+	radius = new_radius;
+}
 
+Primitives::Circ::~Circ()
+{
+}
 
+float Primitives::Circ::getRadius()
+{
+	return radius;
+}

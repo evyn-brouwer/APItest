@@ -9,6 +9,7 @@ namespace Game
 		Object();
 		Object(const char* fileName,const cocos2d::Vec2 &location);
 		Object(const char* fileName,const cocos2d::Vec2 & location, cocos2d::Vec2 size);
+		Object(const char* fileName, const cocos2d::Vec2 & location, float new_rad);
 		~Object();
 		cocos2d::Sprite* getSprite();
 		void update(float dt);
@@ -18,10 +19,12 @@ namespace Game
 		void setLocation(cocos2d::Vec2);
 		cocos2d::Vec2 getLocation();
 		cocos2d::Vec2 getVelocity();
-		bool checkCollision(Game::Object other);
+		bool checkRectCollision(Game::Object other);
+		bool checkCircCollision(Game::Object other);
 		void setSprite(std::string);
 	private:
 		cocos2d::Sprite *sprite;
+		Primitives::Circ cBox;
 		Primitives::Recta rBox;
 		cocos2d::DrawNode *node;
 		cocos2d::Vec2 velocity;

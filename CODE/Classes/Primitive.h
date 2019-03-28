@@ -27,6 +27,18 @@ namespace Primitives
 		cocos2d::Vec2 rect[4];
 	};
 
+	class Circ : public d_Node
+	{
+	public:
+		Circ();
+		Circ(float new_radius);
+		~Circ();
+
+		float getRadius();
+	private:
+		float radius;
+	};
+
 
 
 }

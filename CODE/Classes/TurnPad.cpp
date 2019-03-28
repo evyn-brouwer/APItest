@@ -10,7 +10,7 @@ Pacman::TurnPad::TurnPad(bool up, bool down, bool left, bool right, cocos2d::Vec
 	directions[1] = down;
 	directions[2] = left;
 	directions[3] = right;
-	hitBox = Game::Object("tilePad.png",loc);
+	hitBox = Game::Object("tilePad.png",loc,1);
 }
 
 Game::Object Pacman::TurnPad::getBox()

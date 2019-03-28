@@ -2,7 +2,8 @@
 
 Pacman::Player::Player()
 {
-	hitBox = new Game::Object("CloseNormal.png",cocos2d::Vec2(100,100));
+	hitBox = new Game::Object("CloseNormal.png",cocos2d::Vec2(100,100),1);
+	nextDirection = none;
 }
 
 Pacman::Direction Pacman::Player::getDirection()

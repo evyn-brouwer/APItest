@@ -58,6 +58,7 @@ private:
 	cocos2d::Director* director;
 	cocos2d::Label *scoreLabel;
 
+	cocos2d::Label *testLabel;
 
 	Pacman::TurnPad *testPad;
 
@@ -70,7 +71,7 @@ private:
 
 	Pacman::TurnPad *startPad;//for future reference
 	Pacman::TurnPad *GhostPad;//future reference
-	std::vector<Pacman::TurnPad> turnPadList;//future reference
+	std::vector<Pacman::TurnPad*> turnPadList;//future reference
 
 };
 

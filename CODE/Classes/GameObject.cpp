@@ -19,6 +19,14 @@ Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location, coco
 	rBox = Primitives::Recta(cocos2d::Vec2(location.x,location.y),cocos2d::Vec2(location.x+size.x, location.y+size.y));
 }
 
+Game::Object::Object(const char * fileName, const cocos2d::Vec2 & location, float new_rad)
+{
+	node = cocos2d::DrawNode::create();
+	sprite = cocos2d::Sprite::create(fileName);
+	sprite->setPosition(location);
+	cBox = Primitives::Circ(new_rad);
+}
+
 Game::Object::~Object()
 {
 }
@@ -54,7 +62,7 @@ cocos2d::Vec2 Game::Object::getVelocity()
 	return velocity;
 }
 
-bool Game::Object::checkCollision(Game::Object other)
+bool Game::Object::checkRectCollision(Game::Object other)
 {
 	//TODO
 	if ((this->getLocation().x + this->rBox.getSize().x < other.getLocation().x) || (this->getLocation().x > other.getLocation().x + other.rBox.getSize().x))//x
@@ -63,6 +71,18 @@ bool Game::Object::checkCollision(Game::Object other)
 		return false;
 	
 		return true;
+}
+
+bool Game::Object::checkCircCollision(Game::Object other)
+{
+	float radiusTogether = this->cBox.getRadius() + other.cBox.getRadius();
+	radiusTogether *= radiusTogether;
+	float dist;
+	dist = (this->getLocation().x - other.getLocation().x) *(this->getLocation().x - other.getLocation().x) +
+		(this->getLocation().y - other.getLocation().y) *(this->getLocation().y - other.getLocation().y);
+	if (dist<=radiusTogether)
+		return true;
+	return false;
 }
 
 void Game::Object::setSprite(std::string imageName)
