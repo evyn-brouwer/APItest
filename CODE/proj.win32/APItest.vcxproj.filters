@@ -50,6 +50,9 @@
     <ClCompile Include="..\Classes\PacDot.cpp">
       <Filter>Pacman</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\LevelLoader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
@@ -90,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\PacDot.h">
       <Filter>Pacman</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelLoader.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

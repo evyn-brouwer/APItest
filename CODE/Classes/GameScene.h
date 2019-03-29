@@ -32,6 +32,8 @@
 #include "TurnPad.h"
 #include "Player.h"
 #include "PacDot.h"
+#include "LevelLoader.h"
+
 class GameScene : public cocos2d::Scene
 {
 public:
@@ -65,13 +67,20 @@ private:
 	Primitives::Recta *borders;
 	cocos2d::Sprite *backGround;
 
-
 	Pacman::Player player;
+
+	// position lists
+	cocos2d::Vec2 startPadPos;
+	std::vector<cocos2d::Vec2> turnPadPos;
+	std::vector<cocos2d::Vec2> dotsPos;
+
 
 	Pacman::TurnPad *startPad;//for future reference
 	Pacman::TurnPad *GhostPad;//future reference
 	std::vector<Pacman::TurnPad*> turnPadList;//future reference
 	std::vector<Pacman::PacDot*> pacDotList;
+
+	LevelLoader loader = LevelLoader::LevelLoader("level1.csv");
 };
 
 #endif // __HELLOWORLD_SCENE_H__
