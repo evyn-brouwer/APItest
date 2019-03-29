@@ -129,7 +129,7 @@ void GameScene::initObjects()
 
 void GameScene::initSprites()
 {
-	backGround = cocos2d::Sprite::create("tempBackgorund.png");
+	backGround = cocos2d::Sprite::create("PacmanMap.png");
 	backGround->setGlobalZOrder(-1);
 	backGround->setAnchorPoint(cocos2d::Vec2(0,0));
 	backGround->setPosition(50,12.5);
@@ -152,42 +152,12 @@ void GameScene::initLabels()
 
 void GameScene::initPads()
 {
-	startPad = new Pacman::TurnPad(true, true, true, true, cocos2d::Vec2(65, 25));
-	startPad->getBox().getSprite()->setVisible(true);
-	this->addChild(startPad->getBox().getSprite());
-
-	for (unsigned int i=0;i<5;i++)//TODO file reading for level
-	{
-		for (unsigned int n=0;n<5;n++)
-		{
-			Pacman::TurnPad *tempPad;
-			tempPad = new Pacman::TurnPad(true, true, true, true, cocos2d::Vec2(65 + n * 60, 25 + i * 60));
-			tempPad->getBox().getSprite()->setVisible(true);
-			turnPadList.push_back(tempPad);
-		}
-	}
-	for (unsigned int i=0;i<turnPadList.size();i++)
-	{
-		this->addChild(turnPadList[i]->getBox().getSprite());
-	}
+	
 }
 
 void GameScene::initDots()
 {
-	for (unsigned int i = 0; i < 5; i++)//TODO file reading for level
-	{
-		for (unsigned int n = 0; n < 5; n++)
-		{
-			Pacman::PacDot * tempDot;
-			tempDot = new Pacman::PacDot(cocos2d::Vec2(65 + n * 60, 25 + i * 60));
-			tempDot->getBox().getSprite()->setVisible(true);
-			pacDotList.push_back(tempDot);
-		}
-	}
-	for (unsigned int i = 0; i < pacDotList.size(); i++)
-	{
-		this->addChild(pacDotList[i]->getBox().getSprite());
-	}
+	
 }
 
 void GameScene::update(float dt)
@@ -195,8 +165,10 @@ void GameScene::update(float dt)
 	checkInput(dt);
 	playerDirections(dt);
 	player.getBox()->update(dt);
-	scoreLabel->setString("Score: \n" + std::to_string(player.getPoints()));
-	player.addPoints(1);
+	updateLabels(dt);
+
+	
+
 }
 
 void GameScene::checkInput(float dt)
@@ -277,6 +249,12 @@ void GameScene::playerDirections(float dt)
 			player.setDirection(player.getNextDirection());
 		}
 	}
+}
+
+void GameScene::updateLabels(float dt)
+{
+	scoreLabel->setString("Score: \n" + std::to_string(player.getPoints()));
+
 }
 
 

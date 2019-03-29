@@ -48,6 +48,7 @@ public:
 	void update(float dt);
 	void checkInput(float dt);
 	void playerDirections(float dt);
+	void updateLabels(float dt);
 
 	//initial stuff
 	void initPrimitives();
