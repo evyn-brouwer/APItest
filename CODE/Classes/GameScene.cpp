@@ -136,18 +136,32 @@ bool GameScene::init()
 			else if (loader.map[y][x] == "o") {
 
 			}
+			// ghost spawn
+			blinky.getBox()->getSprite()->setVisible(true);
+			blinky.getBox()->setLocation(Vec2()); // substitute a pos
+			ghostList.push_back(blinky);
+			this->addChild(blinky.getBox()->getSprite());
+			pinky.getBox()->getSprite()->setVisible(true);
+			pinky.getBox()->setLocation(Vec2()); // substitute a pos
+			ghostList.push_back(pinky);
+			this->addChild(pinky.getBox()->getSprite());
+			inky.getBox()->getSprite()->setVisible(true);
+			inky.getBox()->setLocation(Vec2()); // substitute a pos
+			ghostList.push_back(inky);
+			this->addChild(inky.getBox()->getSprite());
+			clyde.getBox()->getSprite()->setVisible(true);
+			clyde.getBox()->setLocation(Vec2()); // substitute a pos
+			ghostList.push_back(clyde);
+			this->addChild(clyde.getBox()->getSprite());
 		}
 	}
 
 	//put code here
 	initPrimitives();
-	//initObjects();
 	initSprites();
 	initLabels();
 	director = cocos2d::Director::getInstance();
 	
-	
-
 	this->scheduleUpdate();
 	return true;
 }
@@ -177,8 +191,6 @@ void GameScene::initObjects()
 {
 	initPads();
 	initDots();
-	
-	
 }
 
 void GameScene::initSprites()
@@ -247,12 +259,14 @@ void GameScene::initDots()
 void GameScene::update(float dt)
 {
 	checkInput(dt);
+	aiUpdate(dt);
 	playerDirections(dt);
 	player.getBox()->update(dt);
+	blinky.getBox()->update(dt);
+	pinky.getBox()->update(dt);
+	inky.getBox()->update(dt);
+	clyde.getBox()->update(dt);
 	updateLabels(dt);
-
-	
-
 }
 
 void GameScene::checkInput(float dt)
@@ -299,6 +313,13 @@ void GameScene::checkInput(float dt)
 
 }
 
+void GameScene::aiUpdate(float dt)
+{
+	for (int i = 0; i < ghostList.size(); i++) {
+
+	}
+}
+
 void GameScene::playerDirections(float dt)
 {
 	for (unsigned int i=0;i<turnPadList.size();i++)
@@ -331,6 +352,38 @@ void GameScene::playerDirections(float dt)
 				player.getBox()->setVelocity(cocos2d::Vec2(0,0));
 			}
 			player.setDirection(player.getNextDirection());
+		}
+
+		for (int i = 0; i < ghostList.size(); i++) {
+			if (ghostList[i].getBox()->checkCircCollision(turnPadList[i]->getBox()))
+			{
+				if (turnPadList[i]->directions[player.getNextDirection()])
+				{
+					switch (ghostList[i].getNextDirection())
+					{
+					case Pacman::up:
+						ghostList[i].getBox()->setVelocity(cocos2d::Vec2(0, 50));
+						break;
+					case Pacman::down:
+						ghostList[i].getBox()->setVelocity(cocos2d::Vec2(0, -50));
+						break;
+					case Pacman::left:
+						ghostList[i].getBox()->setVelocity(cocos2d::Vec2(-50, 0));
+						break;
+					case Pacman::right:
+						ghostList[i].getBox()->setVelocity(cocos2d::Vec2(50, 0));
+						break;
+					default:
+						ghostList[i].getBox()->setVelocity(cocos2d::Vec2(0, 0));
+						break;
+					}
+				}
+				else
+				{
+					ghostList[i].getBox()->setVelocity(cocos2d::Vec2(0, 0));
+				}
+				ghostList[i].setDirection(ghostList[i].getNextDirection());
+			}
 		}
 	}
 }

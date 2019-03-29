@@ -60,3 +60,49 @@ Game::Object* Pacman::Player::getBox()
 {
 	return hitBox;
 }
+
+Pacman::Ghost::Ghost()
+{
+	hitBox = new Game::Object("CloseNormal.png", cocos2d::Vec2(100, 100), 1);
+	nextDirection = none;
+}
+
+Pacman::Direction Pacman::Ghost::getDirection()
+{
+	return currentDirection;
+}
+
+void Pacman::Ghost::setDirection(Pacman::Direction new_direction)
+{
+	currentDirection = new_direction;
+}
+
+Pacman::Direction Pacman::Ghost::getNextDirection()
+{
+	return nextDirection;
+}
+
+void Pacman::Ghost::setNextDirection(Pacman::Direction new_direction)
+{
+	nextDirection = new_direction;
+}
+
+int Pacman::Ghost::getLives()
+{
+	return lives;
+}
+
+void Pacman::Ghost::setLives(unsigned int new_Lives)
+{
+	lives = new_Lives;
+}
+
+void Pacman::Ghost::loseLife()
+{
+	lives--;
+}
+
+Game::Object* Pacman::Ghost::getBox()
+{
+	return hitBox;
+}

@@ -49,6 +49,7 @@ public:
 	//update functions
 	void update(float dt);
 	void checkInput(float dt);
+	void aiUpdate(float dt);
 	void playerDirections(float dt);
 	void updateLabels(float dt);
 
@@ -69,6 +70,12 @@ private:
 	cocos2d::Sprite *backGround;
 
 	Pacman::Player player;
+	Pacman::Ghost blinky;
+	Pacman::Ghost pinky;
+	Pacman::Ghost inky;
+	Pacman::Ghost clyde;
+
+	std::vector<Pacman::Ghost> ghostList;
 
 	// position lists
 	cocos2d::Vec2 startPadPos;
