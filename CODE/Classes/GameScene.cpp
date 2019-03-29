@@ -118,19 +118,13 @@ void GameScene::initPrimitives()
 
 void GameScene::initObjects()
 {
-	startPad = new Pacman::TurnPad(true,true,true,true,cocos2d::Vec2(150,150));
-	startPad->getBox().getSprite()->setVisible(true);
-	this->addChild(startPad->getBox().getSprite());
-
-	testPad = new Pacman::TurnPad(true,true,true,true,cocos2d::Vec2(150,200));
-	testPad->getBox().getSprite()->setVisible(true);
-	this->addChild(testPad->getBox().getSprite());
-	turnPadList.push_back(testPad);
-
+	initPads();
+	initDots();
 	player.getBox()->getSprite()->setVisible(true);
 	player.getBox()->setLocation(startPad->getBox().getLocation());
 	turnPadList.push_back(startPad);
 	this->addChild(player.getBox()->getSprite());
+	
 }
 
 void GameScene::initSprites()
@@ -154,6 +148,46 @@ void GameScene::initLabels()
 	testLabel->setPosition(400, 270);
 	testLabel->setVisible(true);
 	this->addChild(testLabel);
+}
+
+void GameScene::initPads()
+{
+	startPad = new Pacman::TurnPad(true, true, true, true, cocos2d::Vec2(65, 25));
+	startPad->getBox().getSprite()->setVisible(true);
+	this->addChild(startPad->getBox().getSprite());
+
+	for (unsigned int i=0;i<5;i++)//TODO file reading for level
+	{
+		for (unsigned int n=0;n<5;n++)
+		{
+			Pacman::TurnPad *tempPad;
+			tempPad = new Pacman::TurnPad(true, true, true, true, cocos2d::Vec2(65 + n * 60, 25 + i * 60));
+			tempPad->getBox().getSprite()->setVisible(true);
+			turnPadList.push_back(tempPad);
+		}
+	}
+	for (unsigned int i=0;i<turnPadList.size();i++)
+	{
+		this->addChild(turnPadList[i]->getBox().getSprite());
+	}
+}
+
+void GameScene::initDots()
+{
+	for (unsigned int i = 0; i < 5; i++)//TODO file reading for level
+	{
+		for (unsigned int n = 0; n < 5; n++)
+		{
+			Pacman::PacDot * tempDot;
+			tempDot = new Pacman::PacDot(cocos2d::Vec2(65 + n * 60, 25 + i * 60));
+			tempDot->getBox().getSprite()->setVisible(true);
+			pacDotList.push_back(tempDot);
+		}
+	}
+	for (unsigned int i = 0; i < pacDotList.size(); i++)
+	{
+		this->addChild(pacDotList[i]->getBox().getSprite());
+	}
 }
 
 void GameScene::update(float dt)
