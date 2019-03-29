@@ -98,7 +98,7 @@ bool GameScene::init()
 						dirs.push_back(false);
 					}
 				}
-				startPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(65 + x * 30, 25 + tmpy * 30));
+				startPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
 				startPad->getBox().getSprite()->setVisible(true);
 				this->addChild(startPad->getBox().getSprite());
 
@@ -119,7 +119,7 @@ bool GameScene::init()
 					}
 				}
 				Pacman::TurnPad *tempPad;
-				tempPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(65 + x * 30, 25 + tmpy * 30));
+				tempPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
 				tempPad->getBox().getSprite()->setVisible(true);
 				turnPadList.push_back(tempPad);
 				this->addChild(tempPad->getBox().getSprite());
