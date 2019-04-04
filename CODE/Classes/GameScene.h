@@ -52,6 +52,7 @@ public:
 	void aiUpdate(float dt);
 	void playerDirections(float dt);
 	void updateLabels(float dt);
+	void collisions();
 
 	//initial stuff
 	void initPrimitives();
@@ -84,9 +85,9 @@ private:
 
 
 	Pacman::TurnPad *startPad;//for future reference
-	Pacman::TurnPad *GhostPad;//future reference
 	std::vector<Pacman::TurnPad*> turnPadList;//future reference
 	std::vector<Pacman::PacDot*> pacDotList;
+	std::vector<Pacman::PowerPellet*> powerPelletList;
 
 	LevelLoader loader = LevelLoader::LevelLoader("level1.csv");
 };

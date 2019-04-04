@@ -11,5 +11,14 @@ namespace Pacman
 		Game::Object hitBox;
 	};
 
+	class PowerPellet
+	{
+	public:
+		PowerPellet(cocos2d::Vec2 new_loc);
+		Game::Object getBox();
+	private:
+		Game::Object hitBox;
+	};
+
 
 }

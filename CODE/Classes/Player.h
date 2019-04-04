@@ -18,7 +18,9 @@ namespace Pacman
 		void setPoints(unsigned int);
 		void addPoints(unsigned int);
 		Game::Object* getBox();
+		void update(float dt);
 		//bool checkPath();
+		bool checkCollision(Game::Object other);
 	private:
 		Pacman::Direction currentDirection;
 		Pacman::Direction nextDirection;
@@ -39,6 +41,7 @@ namespace Pacman
 		void setLives(unsigned int);
 		void loseLife();
 		Game::Object* getBox();
+		void update(float dt);
 		//bool checkPath();
 	private:
 		Pacman::Direction currentDirection;

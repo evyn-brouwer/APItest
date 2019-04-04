@@ -83,83 +83,13 @@ bool GameScene::init()
 	this->addChild(menu, 1);
 
 	//// Loader code
-	for (int y = loader.map.size() - 1; y >= 0; y--) {
-		for (int x = 0; x < loader.map[y].size(); x++) {
-			int tmpy = loader.map.size() - y;
-
-			// startPad/player position | to create a start pad: *TTTT
-			if (loader.map[y][x][0] == '*') {
-				std::vector<bool> dirs;
-				for (int i = 1; i < 5; i++) {
-					if (loader.map[y][x][i] == 'T') {
-						dirs.push_back(true);
-					}
-					else if (loader.map[y][x][i] == 'F') {
-						dirs.push_back(false);
-					}
-				}
-				startPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
-				startPad->getBox().getSprite()->setVisible(true);
-				this->addChild(startPad->getBox().getSprite());
-
-				player.getBox()->getSprite()->setVisible(true);
-				player.getBox()->setLocation(startPad->getBox().getLocation());
-				turnPadList.push_back(startPad);
-				this->addChild(player.getBox()->getSprite());
-			}
-			// turnPad positions | to create a turn pad: TTTT
-			else if (loader.map[y][x].length() == 4) {
-				std::vector<bool> dirs;
-				for (int i = 0; i < 4; i++) {
-					if (loader.map[y][x][i] == 'T') {
-						dirs.push_back(true);
-					}
-					else if (loader.map[y][x][i] == 'F') {
-						dirs.push_back(false);
-					}
-				}
-				Pacman::TurnPad *tempPad;
-				tempPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
-				tempPad->getBox().getSprite()->setVisible(true);
-				turnPadList.push_back(tempPad);
-				this->addChild(tempPad->getBox().getSprite());
-			}
-			// pacdot positions | to create a pacdot: .
-			else if (loader.map[y][x] == ".") {
-				Pacman::PacDot * tempDot;
-				tempDot = new Pacman::PacDot(Vec2(65 + x * 60, 25 + tmpy * 60));
-				tempDot->getBox().getSprite()->setVisible(true);
-				pacDotList.push_back(tempDot);
-				this->addChild(pacDotList[pacDotList.size() - 1]->getBox().getSprite());
-			}
-			// powerpellet positions | to create a powepellet: o
-			else if (loader.map[y][x] == "o") {
-
-			}
-			// ghost spawn
-			blinky.getBox()->getSprite()->setVisible(true);
-			blinky.getBox()->setLocation(Vec2()); // substitute a pos
-			ghostList.push_back(blinky);
-			this->addChild(blinky.getBox()->getSprite());
-			pinky.getBox()->getSprite()->setVisible(true);
-			pinky.getBox()->setLocation(Vec2()); // substitute a pos
-			ghostList.push_back(pinky);
-			this->addChild(pinky.getBox()->getSprite());
-			inky.getBox()->getSprite()->setVisible(true);
-			inky.getBox()->setLocation(Vec2()); // substitute a pos
-			ghostList.push_back(inky);
-			this->addChild(inky.getBox()->getSprite());
-			clyde.getBox()->getSprite()->setVisible(true);
-			clyde.getBox()->setLocation(Vec2()); // substitute a pos
-			ghostList.push_back(clyde);
-			this->addChild(clyde.getBox()->getSprite());
-		}
-	}
+	
 
 	//put code here
 	initPrimitives();
 	initSprites();
 	initLabels();
+	initObjects();
 	director = cocos2d::Director::getInstance();
 	
 	this->scheduleUpdate();
@@ -218,55 +148,140 @@ void GameScene::initLabels()
 
 void GameScene::initPads()
 {
-	startPad = new Pacman::TurnPad(true, true, true, true, cocos2d::Vec2(65, 25));
-	startPad->getBox().getSprite()->setVisible(true);
-	this->addChild(startPad->getBox().getSprite());
+	for (int y = loader.map.size() - 1; y >= 0; y--) {
+		for (int x = 0; x < loader.map[y].size(); x++) {
+			int tmpy = loader.map.size() - y;
 
-	for (unsigned int i=0;i<5;i++)//TODO file reading for level
-	{
-		for (unsigned int n=0;n<5;n++)
-		{
-			Pacman::TurnPad *tempPad;
-			tempPad = new Pacman::TurnPad(true, true, true, true, cocos2d::Vec2(65 + n * 60, 25 + i * 60));
-			tempPad->getBox().getSprite()->setVisible(true);
-			turnPadList.push_back(tempPad);
+			// startPad/player position | to create a start pad: *TTTT
+			if (loader.map[y][x][0] == '*') {
+				std::vector<bool> dirs;
+				for (int i = 1; i < 5; i++) {
+					if (loader.map[y][x][i] == 'T') {
+						dirs.push_back(true);
+					}
+					else if (loader.map[y][x][i] == 'F') {
+						dirs.push_back(false);
+					}
+				}
+				startPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
+				//startPad->getBox().getSprite()->setVisible(true);
+				this->addChild(startPad->getBox().getSprite());
+
+				player.getBox()->getSprite()->setVisible(true);
+				player.getBox()->setLocation(startPad->getBox().getLocation());
+				turnPadList.push_back(startPad);
+				this->addChild(player.getBox()->getSprite());
+			}
+			// turnPad positions | to create a turn pad: TTTT
+			else if (loader.map[y][x].length() == 4) {
+				std::vector<bool> dirs;
+				for (int i = 0; i < 4; i++) {
+					if (loader.map[y][x][i] == 'T') {
+						dirs.push_back(true);
+					}
+					else if (loader.map[y][x][i] == 'F') {
+						dirs.push_back(false);
+					}
+				}
+				Pacman::TurnPad *tempPad;
+				tempPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
+				//tempPad->getBox().getSprite()->setVisible(true);
+				turnPadList.push_back(tempPad);
+				this->addChild(tempPad->getBox().getSprite());
+				Pacman::PacDot * tempDot;
+				tempDot = new Pacman::PacDot(Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
+				tempDot->getBox().getSprite()->setVisible(true);
+				pacDotList.push_back(tempDot);
+				this->addChild(pacDotList[pacDotList.size() - 1]->getBox().getSprite());
+			}
+			else if (loader.map[y][x].length() == 5) {
+				std::vector<bool> dirs;
+				for (int i = 0; i < 4; i++) {
+					if (loader.map[y][x][i] == 'T') {
+						dirs.push_back(true);
+					}
+					else if (loader.map[y][x][i] == 'F') {
+						dirs.push_back(false);
+					}
+				}
+				Pacman::TurnPad *tempPad;
+				tempPad = new Pacman::TurnPad(dirs[0], dirs[1], dirs[2], dirs[3], Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
+				//tempPad->getBox().getSprite()->setVisible(true);
+				turnPadList.push_back(tempPad);
+				this->addChild(tempPad->getBox().getSprite());
+				if (loader.map[y][x][4]=='P')
+				{
+					Pacman::PowerPellet * tempPellet;
+					tempPellet = new Pacman::PowerPellet((Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34)));
+					tempPellet->getBox().getSprite()->setVisible(true);
+					powerPelletList.push_back(tempPellet);
+					this->addChild(powerPelletList[powerPelletList.size()-1]->getBox().getSprite());
+				}
+			}
+			// pacdot positions | to create a pacdot: .
+			else if (loader.map[y][x] == ".") {
+				Pacman::PacDot * tempDot;
+				tempDot = new Pacman::PacDot(Vec2(55 + x * 10.34, 7.5 + tmpy * 10.34));
+				tempDot->getBox().getSprite()->setVisible(true);
+				pacDotList.push_back(tempDot);
+				this->addChild(pacDotList[pacDotList.size() - 1]->getBox().getSprite());
+			}
+			// powerpellet positions | to create a powepellet: o
+			// ghost spawn
+			//blinky.getBox()->getSprite()->setVisible(true);
+			//blinky.getBox()->setLocation(Vec2()); // substitute a pos
+			//ghostList.push_back(blinky);
+			//this->addChild(blinky.getBox()->getSprite());
+			//pinky.getBox()->getSprite()->setVisible(true);
+			//pinky.getBox()->setLocation(Vec2()); // substitute a pos
+			//ghostList.push_back(pinky);
+			//this->addChild(pinky.getBox()->getSprite());
+			//inky.getBox()->getSprite()->setVisible(true);
+			//inky.getBox()->setLocation(Vec2()); // substitute a pos
+			//ghostList.push_back(inky);
+			//this->addChild(inky.getBox()->getSprite());
+			//clyde.getBox()->getSprite()->setVisible(true);
+			//clyde.getBox()->setLocation(Vec2()); // substitute a pos
+			//ghostList.push_back(clyde);
+			//this->addChild(clyde.getBox()->getSprite());
+			for (unsigned int i=0;i<turnPadList.size();i++)
+			{
+				turnPadList[i]->getBox().getSprite()->setVisible(false);
+			}
 		}
-	}
-	for (unsigned int i=0;i<turnPadList.size();i++)
-	{
-		this->addChild(turnPadList[i]->getBox().getSprite());
 	}
 }
 
 void GameScene::initDots()
 {
-	for (unsigned int i = 0; i < 5; i++)//TODO file reading for level
-	{
-		for (unsigned int n = 0; n < 5; n++)
-		{
-			Pacman::PacDot * tempDot;
-			tempDot = new Pacman::PacDot(cocos2d::Vec2(65 + n * 60, 25 + i * 60));
-			tempDot->getBox().getSprite()->setVisible(true);
-			pacDotList.push_back(tempDot);
-		}
-	}
-	for (unsigned int i = 0; i < pacDotList.size(); i++)
-	{
-		this->addChild(pacDotList[i]->getBox().getSprite());
-	}
+	//for (unsigned int i = 0; i < 5; i++)//TODO file reading for level
+	//{
+	//	for (unsigned int n = 0; n < 5; n++)
+	//	{
+	//		Pacman::PacDot * tempDot;
+	//		tempDot = new Pacman::PacDot(cocos2d::Vec2(65 + n * 60, 25 + i * 60));
+	//		tempDot->getBox().getSprite()->setVisible(true);
+	//		pacDotList.push_back(tempDot);
+	//	}
+	//}
+	//for (unsigned int i = 0; i < pacDotList.size(); i++)
+	//{
+	//	this->addChild(pacDotList[i]->getBox().getSprite());
+	//}
 }
 
 void GameScene::update(float dt)
 {
 	checkInput(dt);
-	aiUpdate(dt);
+	//aiUpdate(dt);
 	playerDirections(dt);
-	player.getBox()->update(dt);
-	blinky.getBox()->update(dt);
-	pinky.getBox()->update(dt);
-	inky.getBox()->update(dt);
-	clyde.getBox()->update(dt);
+	player.update(dt);
+	//blinky.update(dt);
+	//pinky.update(dt);
+	//inky.update(dt);
+	//clyde.update(dt);
 	updateLabels(dt);
+	collisions();
 }
 
 void GameScene::checkInput(float dt)
@@ -324,9 +339,9 @@ void GameScene::playerDirections(float dt)
 {
 	for (unsigned int i=0;i<turnPadList.size();i++)
 	{
-		if (player.getBox()->checkCircCollision(turnPadList[i]->getBox()))
+		if (player.checkCollision(turnPadList[i]->getBox()))
 		{
-			if (turnPadList[i]->directions[player.getNextDirection()])
+			if (turnPadList[i]->directions[player.getNextDirection()] )
 			{
 				switch (player.getNextDirection())
 				{
@@ -346,18 +361,22 @@ void GameScene::playerDirections(float dt)
 					player.getBox()->setVelocity(cocos2d::Vec2(0, 0));
 					break;
 				}
+				player.setDirection(player.getNextDirection());
+			}
+			else if (turnPadList[i]->directions[player.getDirection()])
+			{
+
 			}
 			else
 			{
 				player.getBox()->setVelocity(cocos2d::Vec2(0,0));
 			}
-			player.setDirection(player.getNextDirection());
 		}
 
 		for (int i = 0; i < ghostList.size(); i++) {
 			if (ghostList[i].getBox()->checkCircCollision(turnPadList[i]->getBox()))
 			{
-				if (turnPadList[i]->directions[player.getNextDirection()])
+				if (turnPadList[i]->directions[ghostList[i].getNextDirection()])
 				{
 					switch (ghostList[i].getNextDirection())
 					{
@@ -392,6 +411,18 @@ void GameScene::updateLabels(float dt)
 {
 	scoreLabel->setString("Score: \n" + std::to_string(player.getPoints()));
 
+}
+
+void GameScene::collisions()
+{
+	for (unsigned int i=0;i<pacDotList.size();i++)
+	{
+		if (player.checkCollision(pacDotList[i]->getBox()))
+		{
+			//pacDotList.erase();
+			player.addPoints(10);
+		}
+	}
 }
 
 

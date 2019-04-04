@@ -61,6 +61,18 @@ Game::Object* Pacman::Player::getBox()
 	return hitBox;
 }
 
+void Pacman::Player::update(float dt)
+{
+	this->hitBox->update(dt);
+}
+
+bool Pacman::Player::checkCollision(Game::Object other)
+{
+	if (this->hitBox->checkCircCollision(other))
+		return true;
+	return false;
+}
+
 Pacman::Ghost::Ghost()
 {
 	hitBox = new Game::Object("CloseNormal.png", cocos2d::Vec2(100, 100), 1);
@@ -105,4 +117,9 @@ void Pacman::Ghost::loseLife()
 Game::Object* Pacman::Ghost::getBox()
 {
 	return hitBox;
+}
+
+void Pacman::Ghost::update(float dt)
+{
+	this->hitBox->update(dt);
 }
