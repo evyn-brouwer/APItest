@@ -155,7 +155,7 @@ void GameScene::initPads()
 			// startPad/player position | to create a start pad: *TTTT
 			if (loader.map[y][x][0] == '*') {
 				std::vector<bool> dirs;
-				for (int i = 1; i < 5; i++) {
+				for (int i = 1; i < 6; i++) {
 					if (loader.map[y][x][i] == 'T') {
 						dirs.push_back(true);
 					}
@@ -419,7 +419,16 @@ void GameScene::collisions()
 	{
 		if (player.checkCollision(pacDotList[i]->getBox()))
 		{
-			//pacDotList.erase();
+			this->removeChild(pacDotList[i]->getBox().getSprite());
+			delete(pacDotList[i]);
+			if(i>pacDotList.size()-2)
+			i--;
+			for (unsigned int n=i;n<pacDotList.size()-1;n++)
+			{
+				pacDotList[n] = pacDotList[n + 1];
+				if (n == pacDotList.size() - 1)
+					pacDotList.pop_back();
+			}
 			player.addPoints(10);
 		}
 	}
