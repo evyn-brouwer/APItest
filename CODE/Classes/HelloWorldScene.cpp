@@ -22,6 +22,19 @@
  THE SOFTWARE.
  ****************************************************************************/
 
+ /*
+ Kristian Menes	100383679
+
+ Christian Mariani	100661661
+
+
+ Evyn Brouwer 100702629
+
+
+ Steph	100706123
+
+ Vincent 	100709888
+ */
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "Input.h"
